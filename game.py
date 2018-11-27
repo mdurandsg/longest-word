@@ -1,6 +1,7 @@
 """Module docstring"""
 import random
 import string
+import requests
 
 class Game(): # pylint: disable=too-few-public-methods
     """docstring for Game"""
@@ -20,7 +21,10 @@ class Game(): # pylint: disable=too-few-public-methods
                 letters.remove(letter)
             else:
                 return False
-        return True
+        url = f"https://wagon-dictionary.herokuapp.com/{word}"
+        r = requests.get(url)
+        return r.json()["found"]
+
 
 if __name__ == '__main__':
     Game()
